@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_demo_app/app/pages/home_page.dart';
 import 'package:login_demo_app/app/pages/login_page.dart';
 import 'package:login_demo_app/app/theme.dart';
 
@@ -8,13 +9,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: Themes.mainTheme(),
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: appRoutes,
     );
   }
 
   final Map<String, WidgetBuilder> appRoutes = {
     '/': (context) => LoginPage(),
-    // '/home' : (context) => HomePage(),
+    '/home' : (context) => HomePage(),
   };
 }
