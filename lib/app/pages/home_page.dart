@@ -12,6 +12,22 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  PreferredSizeWidget _appBar(context) {
+    return AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          _logOutButton(context),
+        ],
+        bottom: TabBar(
+          tabs: [
+            Tab(text: 'On hold'),
+            Tab(text: 'In progress'),
+            Tab(text: 'Needs review'),
+            Tab(text: 'Approved'),
+          ],
+        ));
+  }
+
   Widget _logOutButton(context) {
     return Container(
         height: 50,
@@ -24,26 +40,5 @@ class HomePage extends StatelessWidget {
             icon: Icon(Icons.arrow_back_rounded),
             onPressed: () {},
             splashRadius: 25));
-  }
-
-  PreferredSizeWidget _tabBar() {
-    return TabBar(
-      tabs: [
-        Tab(text: 'On hold'),
-        Tab(text: 'In progress'),
-        Tab(text: 'Needs review'),
-        Tab(text: 'Approved'),
-      ],
-    );
-  }
-
-  PreferredSizeWidget _appBar(context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      actions: [
-        _logOutButton(context),
-      ],
-      bottom: _tabBar(),
-    );
   }
 }
