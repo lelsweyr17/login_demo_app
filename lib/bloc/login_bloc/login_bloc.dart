@@ -5,7 +5,7 @@ import 'package:login_demo_app/utils/validators.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState.empty());
-  
+
   @override
   LoginState get initialState => LoginState.empty();
 

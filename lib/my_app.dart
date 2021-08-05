@@ -16,6 +16,6 @@ class MyApp extends StatelessWidget {
 
   final Map<String, WidgetBuilder> appRoutes = {
     '/': (context) => LoginPage(),
-    '/home' : (context) => HomePage(),
+    '/home': (context) => HomePage(),
   };
 }
