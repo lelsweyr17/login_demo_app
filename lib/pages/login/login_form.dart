@@ -11,39 +11,39 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  LoginBloc _loginBloc = LoginBloc();
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  bool get isPopulated =>
+  bool get isNotEmpty =>
       _usernameController.text.isNotEmpty &&
       _passwordController.text.isNotEmpty;
 
   bool isLoginButtonEnabled(LoginState state) {
-    return state.isFormValid && isPopulated && !state.isSubmitting;
+    return state.isFormValid && isNotEmpty && !state.isSubmitting;
   }
 
-  LoginBloc _loginBloc = LoginBloc();
-
-  @override
-  void initState() {
-    super.initState();
-    _loginBloc = BlocProvider.of<LoginBloc>(context);
-    _usernameController.addListener(_onUsernameChanged);
-    _passwordController.addListener(_onPasswordChanged);
-  }
-
-  void _onUsernameChanged() {
+  void _usernameChanged() {
     _loginBloc.add(LoginUsernameChange(_usernameController.text));
   }
 
-  void _onPasswordChanged() {
+  void _passwordChanged() {
     _loginBloc.add(LoginPasswordChange(_passwordController.text));
   }
 
   void _onFormSubmitted() {
     _loginBloc.add(LoginWithCredentialsPressed(
         _usernameController.text, _passwordController.text));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loginBloc = BlocProvider.of<LoginBloc>(context);
+    _usernameController.addListener(_usernameChanged);
+    _passwordController.addListener(_passwordChanged);
   }
 
   @override
@@ -68,17 +68,17 @@ class _LoginFormState extends State<LoginForm> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SampleTextField(
+                  sampleTextField(
                       _usernameController,
                       state.isUsernameValid,
                       state.isUsernameValid ? null : 'Minimum is 4 characters',
                       false),
-                  SampleTextField(
+                  sampleTextField(
                       _passwordController,
                       state.isPasswordValid,
                       state.isPasswordValid ? null : 'Minimum is 8 characters',
                       true),
-                  logInButton(context, state.isFormValid),
+                  logInButton(context, state),
                 ],
               ),
             ),
@@ -88,34 +88,7 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  Widget logInButton(context, isValid) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.circular(MediaQuery.of(context).size.height * 0.5),
-          color: Theme.of(context).accentColor,
-        ),
-        child: TextButton(
-          child: Text('Log in',
-              style: TextStyle(color: Theme.of(context).primaryColor)),
-          onPressed: () {
-            if (_formKey.currentState!.validate() &&
-                isValid &&
-                _usernameController.text.isNotEmpty &&
-                _passwordController.text.isNotEmpty) {
-              // event to bloc!!! (now is uncorrect bacause of connection UI with data)
-              // context.read<LoginBloc>().add(LoginWithCredentialsPressed(
-              //     _usernameController.text, _passwordController.text));
-              authenticateUser(
-                  _usernameController.text, _passwordController.text);
-            }
-          },
-        ));
-  }
-
-  Widget SampleTextField(controller, isValid, errorMessage, obscure) {
+  Widget sampleTextField(controller, isValid, errorMessage, obscure) {
     return TextField(
         obscureText: obscure,
         controller: controller,
@@ -134,6 +107,26 @@ class _LoginFormState extends State<LoginForm> {
               borderRadius: BorderRadius.circular(
                   MediaQuery.of(context).size.height * 0.5),
               borderSide: BorderSide(color: Theme.of(context).accentColor)),
+        ));
+  }
+
+  Widget logInButton(context, state) {
+    return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius:
+              BorderRadius.circular(MediaQuery.of(context).size.height * 0.5),
+          color: Theme.of(context).accentColor,
+        ),
+        child: TextButton(
+          child: Text('Log in',
+              style: TextStyle(color: Theme.of(context).primaryColor)),
+          onPressed: () {
+            if (isLoginButtonEnabled(state)) {
+              _onFormSubmitted();
+            }
+          },
         ));
   }
 }
