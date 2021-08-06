@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_demo_app/bloc/login_bloc/login_bloc.dart';
-import 'package:login_demo_app/bloc/login_bloc/login_event.dart';
-import 'package:login_demo_app/bloc/login_bloc/login_state.dart';
+import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_bloc.dart';
+import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_event.dart';
+import 'package:login_demo_app/app/bloc/login_bloc/login_bloc.dart';
+import 'package:login_demo_app/app/bloc/login_bloc/login_event.dart';
+import 'package:login_demo_app/app/bloc/login_bloc/login_state.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -74,7 +76,7 @@ class _LoginFormState extends State<LoginForm> {
               content: Text('Login success'),
               backgroundColor: Colors.greenAccent,
               duration: Duration(seconds: 1)));
-          // BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
+          BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
         }
       },
       child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {

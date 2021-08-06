@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:login_demo_app/bloc/login_bloc/login_event.dart';
-import 'package:login_demo_app/bloc/login_bloc/login_state.dart';
-import 'package:login_demo_app/service/login_model.dart';
-import 'package:login_demo_app/utils/validators.dart';
+import 'package:login_demo_app/app/bloc/login_bloc/login_event.dart';
+import 'package:login_demo_app/app/bloc/login_bloc/login_state.dart';
+import 'package:login_demo_app/app/service/authenticate_user.dart';
+import 'package:login_demo_app/app/utils/validators.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState.empty());

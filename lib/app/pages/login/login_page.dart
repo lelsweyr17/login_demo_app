@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_demo_app/bloc/login_bloc/login_bloc.dart';
-import 'package:login_demo_app/pages/login/login_form.dart';
+import 'package:login_demo_app/app/bloc/login_bloc/login_bloc.dart';
+import 'package:login_demo_app/app/pages/login/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   @override

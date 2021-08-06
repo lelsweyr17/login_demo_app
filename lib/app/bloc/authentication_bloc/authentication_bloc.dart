@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_demo_app/bloc/authentication_bloc/authentication_event.dart';
-import 'package:login_demo_app/bloc/authentication_bloc/authentication_state.dart';
+import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_event.dart';
+import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc() : super(Unknown());
+  AuthenticationBloc() : super(Unathenticated());
 
   @override
   Stream<AuthenticationState> mapEventToState(
@@ -23,8 +23,10 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapLoggedInToState() async* {
+    
   }
 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {
+    
   }
 }
