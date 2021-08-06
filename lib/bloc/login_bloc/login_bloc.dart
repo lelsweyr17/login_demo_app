@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:login_demo_app/bloc/login_bloc/login_event.dart';
 import 'package:login_demo_app/bloc/login_bloc/login_state.dart';
+import 'package:login_demo_app/service/login_model.dart';
 import 'package:login_demo_app/utils/validators.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -36,6 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     // TODO: login with 'armada' & 'FSH6zBZ0p9yH'
     yield LoginState.loading();
     if (state.isFormValid == true) {
+      authenticateUser(username, password);
       yield LoginState.success();
       print('login success');
     } else {

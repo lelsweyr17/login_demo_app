@@ -16,9 +16,16 @@ Future authenticateUser(String username, String password) async {
     switch (response.statusCode) {
       case 200:
         print('login success');
+        print('${response.body}');
         _apiResponse.Data = User.fromJson(json.decode(response.body));
         break;
+      case 400:
+        print('${response.body}');
+        print('400 error');
+        break;
       default:
+        print('${response.statusCode}');
+        print('${response.body}');
         print('login failure');
         break;
     }

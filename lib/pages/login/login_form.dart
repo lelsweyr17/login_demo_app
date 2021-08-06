@@ -105,7 +105,9 @@ class _LoginFormState extends State<LoginForm> {
                 isValid &&
                 _usernameController.text.isNotEmpty &&
                 _passwordController.text.isNotEmpty) {
-              print('login');
+              // event to bloc!!! (now is uncorrect bacause of connection UI with data)
+              // context.read<LoginBloc>().add(LoginWithCredentialsPressed(
+              //     _usernameController.text, _passwordController.text));
               authenticateUser(
                   _usernameController.text, _passwordController.text);
             }
