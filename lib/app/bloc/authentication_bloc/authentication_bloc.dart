@@ -10,23 +10,11 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapEventToState(
       AuthenticationEvent event) async* {
     if (event is AppStarted) {
-      yield* _mapAppStartedToState();
+      yield Unathenticated();
     } else if (event is LoggedIn) {
-      yield* _mapLoggedInToState();
+      yield Authenticated();
     } else if (event is LoggedOut) {
-      yield* _mapLoggedOutToState();
+      yield Unathenticated();
     }
-  }
-
-  Stream<AuthenticationState> _mapAppStartedToState() async* {
-    
-  }
-
-  Stream<AuthenticationState> _mapLoggedInToState() async* {
-    
-  }
-
-  Stream<AuthenticationState> _mapLoggedOutToState() async* {
-    
   }
 }

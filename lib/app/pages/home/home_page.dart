@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_bloc.dart';
+import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_event.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -38,7 +41,9 @@ class HomePage extends StatelessWidget {
         ),
         child: IconButton(
             icon: Icon(Icons.arrow_back_rounded),
-            onPressed: () {},
+            onPressed: () {
+              BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+            },
             splashRadius: 25));
   }
 }
