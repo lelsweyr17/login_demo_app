@@ -4,7 +4,8 @@ import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_state
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  AuthenticationBloc() : super(Unathenticated());
+  // AuthenticationBloc() : super(Unathenticated());
+  AuthenticationBloc() : super(Authenticated());
 
   @override
   Stream<AuthenticationState> mapEventToState(

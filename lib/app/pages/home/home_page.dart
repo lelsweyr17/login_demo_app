@@ -10,7 +10,12 @@ class HomePage extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: _appBar(context),
-        body: Center(child: Text('Example')),
+        body: const TabBarView(children: [
+          Icon(Icons.fiber_dvr),
+          Icon(Icons.ac_unit),
+          Icon(Icons.face),
+          Icon(Icons.keyboard),
+        ]),
       ),
     );
   }
@@ -22,6 +27,7 @@ class HomePage extends StatelessWidget {
           _logOutButton(context),
         ],
         bottom: TabBar(
+          isScrollable: true,
           tabs: [
             Tab(text: 'On hold'),
             Tab(text: 'In progress'),
