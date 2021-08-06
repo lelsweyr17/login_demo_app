@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_demo_app/bloc/login_bloc/login_bloc.dart';
 import 'package:login_demo_app/bloc/login_bloc/login_event.dart';
 import 'package:login_demo_app/bloc/login_bloc/login_state.dart';
-import 'package:login_demo_app/service/login_model.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -56,7 +55,28 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state.isFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              duration: Duration(seconds: 1),
+              content: Text('Login failure'),
+              backgroundColor: Colors.redAccent,
+            ),
+          );
+        } else if (state.isSubmitting) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(seconds: 1),
+            content: Text('Logging in...'),
+          ));
+        } else if (state.isSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Login success'),
+              backgroundColor: Colors.greenAccent,
+              duration: Duration(seconds: 1)));
+          // BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
+        }
+      },
       child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
         return Form(
           key: _formKey,

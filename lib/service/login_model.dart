@@ -1,49 +1,22 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-Future authenticateUser(String username, String password) async {
-  ApiResponse _apiResponse = ApiResponse();
+Future<void> authenticateUser(String username, String password) async {
+  final response = await http.post(
+      Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/users/login/'),
+      body: {
+        'username': username,
+        'password': password,
+      });
 
-  try {
-    final response = await http.post(
-        Uri.parse(
-            'https://trello.backend.tests.nekidaem.ru/api/v1/users/login/'),
-        body: {
-          'username': username,
-          'password': password,
-        });
-
-    switch (response.statusCode) {
-      case 200:
-        print('login success');
-        print('${response.body}');
-        _apiResponse.Data = User.fromJson(json.decode(response.body));
-        break;
-      case 400:
-        print('${response.body}');
-        print('400 error');
-        break;
-      default:
-        print('${response.statusCode}');
-        print('${response.body}');
-        print('login failure');
-        break;
-    }
-  } catch (e) {}
-}
-
-class ApiResponse {
-  // _data will hold any response converted into
-  // its own object. For example user.
-  Object _data = Object();
-  // _apiError will hold the error object
-  Object _apiError = Object();
-
-  Object get Data => _data;
-  set Data(Object data) => _data = data;
-
-  Object get ApiError => _apiError as Object;
-  set ApiError(Object error) => _apiError = error;
+  switch (response.statusCode) {
+    case 200:
+      break;
+    case 400:
+      throw Exception('400 error');
+    default:
+      throw Exception('login failure');
+  }
 }
 
 class User {
