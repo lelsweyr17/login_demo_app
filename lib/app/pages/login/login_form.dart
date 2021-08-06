@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_event.dart';
-import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_state.dart';
 import 'package:login_demo_app/app/bloc/login_bloc/login_bloc.dart';
 import 'package:login_demo_app/app/bloc/login_bloc/login_event.dart';
 import 'package:login_demo_app/app/bloc/login_bloc/login_state.dart';
@@ -61,6 +60,7 @@ class _LoginFormState extends State<LoginForm> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state.isFailure) {
+          // TODO: enter errors from server
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               duration: Duration(seconds: 1),
