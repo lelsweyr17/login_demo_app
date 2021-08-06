@@ -15,7 +15,12 @@ Future authenticateUser(String username, String password) async {
 
     switch (response.statusCode) {
       case 200:
+        print('login success');
         _apiResponse.Data = User.fromJson(json.decode(response.body));
+        break;
+      default:
+        print('login failure');
+        break;
     }
   } catch (e) {}
 }

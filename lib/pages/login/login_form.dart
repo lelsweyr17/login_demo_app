@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_demo_app/bloc/login_bloc/login_bloc.dart';
 import 'package:login_demo_app/bloc/login_bloc/login_event.dart';
 import 'package:login_demo_app/bloc/login_bloc/login_state.dart';
+import 'package:login_demo_app/service/login_model.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -56,26 +58,29 @@ class _LoginFormState extends State<LoginForm> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {},
       child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-        return Center(
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SampleTextField(
-                    _usernameController,
-                    state.isUsernameValid,
-                    state.isUsernameValid ? null : 'Minimum is 4 characters',
-                    false),
-                SampleTextField(
-                    _passwordController,
-                    state.isPasswordValid,
-                    state.isPasswordValid ? null : 'Minimum is 8 characters',
-                    true),
-                logInButton(context),
-              ],
+        return Form(
+          key: _formKey,
+          child: Center(
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.4,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SampleTextField(
+                      _usernameController,
+                      state.isUsernameValid,
+                      state.isUsernameValid ? null : 'Minimum is 4 characters',
+                      false),
+                  SampleTextField(
+                      _passwordController,
+                      state.isPasswordValid,
+                      state.isPasswordValid ? null : 'Minimum is 8 characters',
+                      true),
+                  logInButton(context, state.isFormValid),
+                ],
+              ),
             ),
           ),
         );
@@ -83,22 +88,29 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  Widget logInButton(context) {
-    return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-      return Container(
-          width: MediaQuery.of(context).size.width,
-          height: 50,
-          decoration: BoxDecoration(
-            borderRadius:
-                BorderRadius.circular(MediaQuery.of(context).size.height * 0.5),
-            color: Theme.of(context).accentColor,
-          ),
-          child: TextButton(
-            child: Text('Log in',
-                style: TextStyle(color: Theme.of(context).primaryColor)),
-            onPressed: () {},
-          ));
-    });
+  Widget logInButton(context, isValid) {
+    return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius:
+              BorderRadius.circular(MediaQuery.of(context).size.height * 0.5),
+          color: Theme.of(context).accentColor,
+        ),
+        child: TextButton(
+          child: Text('Log in',
+              style: TextStyle(color: Theme.of(context).primaryColor)),
+          onPressed: () {
+            if (_formKey.currentState!.validate() &&
+                isValid &&
+                _usernameController.text.isNotEmpty &&
+                _passwordController.text.isNotEmpty) {
+              print('login');
+              authenticateUser(
+                  _usernameController.text, _passwordController.text);
+            }
+          },
+        ));
   }
 
   Widget SampleTextField(controller, isValid, errorMessage, obscure) {

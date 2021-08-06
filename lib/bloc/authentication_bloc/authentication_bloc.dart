@@ -19,6 +19,7 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapAppStartedToState() async* {
+    
   }
 
   Stream<AuthenticationState> _mapLoggedInToState() async* {
