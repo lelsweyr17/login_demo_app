@@ -4,7 +4,7 @@ import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_bloc.
 import 'package:login_demo_app/app/init_app/app_navigator.dart';
 import 'package:login_demo_app/app/init_app/theme.dart';
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
