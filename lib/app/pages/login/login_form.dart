@@ -54,7 +54,7 @@ class _LoginFormState extends State<LoginForm> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state.isFailure) {
-          // TODO: enter errors from server
+          // TODO: enter errors from server (???)
           _notificationSnackBar(context, 'Login failure', Colors.redAccent);
         } else if (state.isSubmitting) {
           _notificationSnackBar(context, 'Logging in...', Colors.white);
