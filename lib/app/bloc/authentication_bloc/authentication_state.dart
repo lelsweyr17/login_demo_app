@@ -1,9 +1,4 @@
-abstract class AuthenticationState {
-  const AuthenticationState();
-
-  @override
-  List<Object> get props => [];
-}
+abstract class AuthenticationState {}
 
 class Unknown extends AuthenticationState {}
 

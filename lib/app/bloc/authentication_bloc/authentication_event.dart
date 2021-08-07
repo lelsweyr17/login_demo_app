@@ -1,9 +1,4 @@
-abstract class AuthenticationEvent {
-  const AuthenticationEvent();
-
-  @override
-  List<Object> get props => [];
-}
+abstract class AuthenticationEvent {}
 
 class AppStarted extends AuthenticationEvent {}
 
