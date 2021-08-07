@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:login_demo_app/app/global/globals.dart' as globals;
 import 'package:login_demo_app/app/models/Card.dart';
 
 class ApiUserDataResponse {
-  static Future<List<Card>> fetchCard(String token) async {
+  static Future<List<Card>> fetchCard() async {
     List<Card> cards = [];
-    var header = 'JWT ' + '$token';
+    var header = 'JWT ' + '${globals.token}';
 
     final response = await http.get(
       Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/cards/'),
@@ -20,13 +21,13 @@ class ApiUserDataResponse {
       Card card = Card(
           id: i['id'],
           row: i['row'],
-          seq_num: i['seq_num'],
+          seqNum: i['seq_num'],
           text: utf8.decode(i['text'].runes.toList()));
-      // print('id: ${i['id']}');
-      // print('row: ${i['row']}');
-      // print('seq_num: ${i['seq_num']}');
-      // print('text: ${utf8.decode(i['text'].runes.toList())}');
-      // print('_______________________________________________');
+      print('id: ${i['id']}');
+      print('row: ${i['row']}');
+      print('seq_num: ${i['seq_num']}');
+      print('text: ${utf8.decode(i['text'].runes.toList())}');
+      print('_______________________________________________');
       cards.add(card);
     }
 
