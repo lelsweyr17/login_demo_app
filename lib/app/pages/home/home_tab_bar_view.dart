@@ -3,27 +3,28 @@ part of "home_page.dart";
 class HomeTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<UserDataBloc, UserDataState>(
-      listener: (context, state) {
-        BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
-        print('get data event');
-        if (state is LoadingDataState) {
-          CircularProgressIndicator();
-        } else if (state is LoadedDataState) {
-          CircularProgressIndicator();
-        } else if (state is LoadingDataErrorState) {
-          CircularProgressIndicator();
-        }
-      },
-      child:
-          BlocBuilder<UserDataBloc, UserDataState>(builder: (context, state) {
+    return BlocBuilder<UserDataBloc, UserDataState>(builder: (context, state) {
+      BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
+      if (state is LoadingDataState) {
+        // print('loading...');
+        return loadingDataIndicator(context);
+      } else if (state is LoadedDataState) {
+        print('loaded!');
+        // return loadingDataIndicator(context);
         return TabBarView(children: [
           _onHold(context),
           _inProgress(context),
           _needsReview(context),
           _approved(context),
         ]);
-      }),
+      }
+      return Center(child: Icon(Icons.error, color: Theme.of(context).accentColor));
+    });
+  }
+
+  Widget loadingDataIndicator(context) {
+    return Center(
+      child: CircularProgressIndicator(color: Theme.of(context).accentColor),
     );
   }
 

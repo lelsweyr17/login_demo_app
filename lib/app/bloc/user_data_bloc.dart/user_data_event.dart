@@ -1,4 +1,3 @@
 abstract class UserDataEvent {}
 
-class GetDataEvent extends UserDataEvent {
-}
+class GetDataEvent extends UserDataEvent {}
