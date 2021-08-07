@@ -4,14 +4,17 @@ class HomeTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
-    return BlocBuilder<UserDataBloc, UserDataState>(builder: (context, state) {
-      return TabBarView(children: [
-        _onHold(context, state),
-        _inProgress(context, state),
-        _needsReview(context, state),
-        _approved(context, state),
-      ]);
-    });
+    final bloc = context.read<UserDataBloc>();
+    return BlocBuilder<UserDataBloc, UserDataState>(
+        bloc: bloc,
+        builder: (context, state) {
+          return TabBarView(children: [
+            _onHold(context, state),
+            _inProgress(context, state),
+            _needsReview(context, state),
+            _approved(context, state),
+          ]);
+        });
   }
 
   Widget _loadingDataIndicator(context) {
@@ -22,7 +25,29 @@ class HomeTabBarView extends StatelessWidget {
 
   Widget _loadingDataError(context) {
     return Center(
-      child: Icon(Icons.error, color: Theme.of(context).accentColor),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.error_outline_rounded,
+              color: Theme.of(context).accentColor, size: 50),
+          SizedBox(height: 15),
+          Text('Loading data error!'),
+          SizedBox(height: 20),
+          Container(
+            height: 40,
+            width: MediaQuery.of(context).size.width * 0.4,
+            decoration: BoxDecoration(
+                color: Theme.of(context).accentColor,
+                borderRadius: BorderRadius.circular(20)),
+            child: TextButton(
+              onPressed: () {
+                BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
+              },
+              child: Text('Update', style: TextStyle(color: Colors.teal)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -34,6 +59,7 @@ class HomeTabBarView extends StatelessWidget {
       print('loaded!');
       return _loadingDataError(context);
     } else {
+      // return _loadingDataError(context);
       return null;
     }
   }

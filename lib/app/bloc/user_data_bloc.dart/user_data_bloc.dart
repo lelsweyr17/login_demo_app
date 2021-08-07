@@ -13,6 +13,7 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
       try {
         yield LoadingDataState();
         print('Loading data...');
+        await Future.delayed(Duration(milliseconds: 700));
         final List<Card> cards = await ApiUserDataResponse.fetchCard();
         print('Loaded data!');
         yield LoadedDataState(cards);
