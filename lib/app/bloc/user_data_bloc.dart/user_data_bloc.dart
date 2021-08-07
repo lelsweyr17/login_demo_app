@@ -6,9 +6,7 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
   UserDataBloc() : super(LoadingDataState());
 
   @override
-  Stream<UserDataState> mapEventToState(UserDataEvent event) async*{
-    if (event is GetDataEvent) {
-      
-    }
+  Stream<UserDataState> mapEventToState(UserDataEvent event) async* {
+    if (event is GetDataEvent) {}
   }
 }

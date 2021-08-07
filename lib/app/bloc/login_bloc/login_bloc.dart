@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:login_demo_app/app/bloc/login_bloc/login_event.dart';
 import 'package:login_demo_app/app/bloc/login_bloc/login_state.dart';
-import 'package:login_demo_app/app/service/api_response.dart';
+import 'package:login_demo_app/app/service/api_login_response.dart';
 import 'package:login_demo_app/app/utils/validators.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -38,7 +38,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     yield LoginState.loading();
 
     try {
-      await authenticateUser(username, password);
+      await ApiLoginResponse.authenticateUser(username, password);
       yield LoginState.success();
     } catch (e) {
       yield LoginState.failure();
