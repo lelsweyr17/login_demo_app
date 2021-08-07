@@ -8,11 +8,11 @@ class HomeTabBarView extends StatelessWidget {
     return BlocBuilder<UserDataBloc, UserDataState>(
         bloc: bloc,
         builder: (context, state) {
-          return TabBarView(children: tabBarViewChildren(context, state));
+          return TabBarView(children: _tabBarViewChildren(context, state));
         });
   }
 
-  List<Widget> tabBarViewChildren(context, state) {
+  List<Widget> _tabBarViewChildren(context, state) {
     List<Widget> widgets = [];
     Widget? check = _checkLoadingDataState(context, state);
 
