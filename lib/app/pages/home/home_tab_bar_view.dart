@@ -3,80 +3,98 @@ part of "home_page.dart";
 class HomeTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
     return BlocBuilder<UserDataBloc, UserDataState>(builder: (context, state) {
-      if (state is LoadingDataState) {
-        print('loading...');
-        return loadingDataIndicator(context);
-      } else if (state is LoadedDataState) {
-        print('loaded!');
-        // return loadingDataIndicator(context);
-        return TabBarView(children: [
-          _onHold(context),
-          _inProgress(context),
-          _needsReview(context),
-          _approved(context),
-        ]);
-      }
-      return Center(
-          child: Icon(Icons.error, color: Theme.of(context).accentColor));
+      return TabBarView(children: [
+        _onHold(context, state),
+        _inProgress(context, state),
+        _needsReview(context, state),
+        _approved(context, state),
+      ]);
     });
   }
 
-  Widget loadingDataIndicator(context) {
+  Widget _loadingDataIndicator(context) {
     return Center(
       child: CircularProgressIndicator(color: Theme.of(context).accentColor),
     );
   }
 
-  Widget _onHold(context) {
-    return Text('');
-    // return ListView.builder(
-    //     itemCount: 10,
-    //     itemBuilder: (context, index) {
-    //       return Card(
-    //         child: ListTile(
-    //           title: Text('on hold'),
-    //         ),
-    //       );
-    //     });
+  Widget _loadingDataError(context) {
+    return Center(
+      child: Icon(Icons.error, color: Theme.of(context).accentColor),
+    );
   }
 
-  Widget _inProgress(context) {
-    return Text('');
-    // return ListView.builder(
-    //     itemCount: 5,
-    //     itemBuilder: (context, index) {
-    //       return Card(
-    //         child: ListTile(
-    //           title: Text('in progress'),
-    //         ),
-    //       );
-    //     });
+  Widget? checkUserDataState(context, state) {
+    if (state is LoadingDataState) {
+      print('loading...');
+      return _loadingDataIndicator(context);
+    } else if (state is LoadingDataErrorState) {
+      print('loaded!');
+      return _loadingDataError(context);
+    } else {
+      return null;
+    }
   }
 
-  Widget _needsReview(context) {
-    return Text('');
-    // return ListView.builder(
-    //     itemCount: 7,
-    //     itemBuilder: (context, index) {
-    //       return Card(
-    //         child: ListTile(
-    //           title: Text('needs review'),
-    //         ),
-    //       );
-    //     });
+  Widget _onHold(context, state) {
+    Widget? check = checkUserDataState(context, state);
+    return (check != null)
+        ? check
+        : ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  title: Text('on hold'),
+                ),
+              );
+            });
   }
 
-  Widget _approved(context) {
-    return Text('');
-    // return ListView.builder(
-    //     itemCount: 2,
-    //     itemBuilder: (context, index) {
-    //       return Card(
-    //         child: ListTile(
-    //           title: Text('approved'),
-    //         ),
-    //       );
-    //     });
+  Widget _inProgress(context, state) {
+    Widget? check = checkUserDataState(context, state);
+    return (check != null)
+        ? check
+        : ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  title: Text('in progress'),
+                ),
+              );
+            });
+  }
+
+  Widget _needsReview(context, state) {
+    Widget? check = checkUserDataState(context, state);
+    return (check != null)
+        ? check
+        : ListView.builder(
+            itemCount: 7,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  title: Text('needs review'),
+                ),
+              );
+            });
+  }
+
+  Widget _approved(context, state) {
+    Widget? check = checkUserDataState(context, state);
+    return (check != null)
+        ? check
+        : ListView.builder(
+            itemCount: 2,
+            itemBuilder: (context, index) {
+              return Card(
+                child: ListTile(
+                  title: Text('approved'),
+                ),
+              );
+            });
   }
 }

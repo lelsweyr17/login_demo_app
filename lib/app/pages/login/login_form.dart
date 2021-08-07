@@ -80,7 +80,7 @@ class _LoginFormState extends State<LoginForm> {
           key: _formKey,
           child: Center(
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.4,
+              height: MediaQuery.of(context).size.height * 0.3,
               width: MediaQuery.of(context).size.width * 0.8,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,6 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                       state.isPasswordValid,
                       state.isPasswordValid ? null : 'Minimum is 8 characters',
                       true),
+                  SizedBox(),
                   logInButton(context, state),
                 ],
               ),
