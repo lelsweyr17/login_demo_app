@@ -14,9 +14,15 @@ Future<void> authenticateUser(String username, String password) async {
 
   switch (response.statusCode) {
     case 200:
-      var jsonData = json.decode(response.body);
-      token = jsonData['token'].split('.')[0];
-      print('token: $token');
+      var jsonData = json.decode(response.body)['token'];
+      token = jsonData;
+      print('jsonData: $jsonData');
+      final parts = jsonData.split(r'.');
+      print('parts: $parts');
+      assert(parts.length == 3);
+      print('OK');
+      print(jsonDecode(
+          utf8.decode(base64Url.decode(base64Url.normalize(parts[1])))));
       fetchCard();
       break;
     case 400:
@@ -27,7 +33,7 @@ Future<void> authenticateUser(String username, String password) async {
 }
 
 Future fetchCard() async {
-  var header = '$token';
+  var header = 'JWT ' + '$token';
   print('JWT: $header');
   final response = await http.get(
     Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/cards/'),
