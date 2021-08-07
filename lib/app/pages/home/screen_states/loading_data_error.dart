@@ -16,21 +16,25 @@ class LoadingDataError extends StatelessWidget {
             SizedBox(height: 15),
             Text('Loading data error!'),
             SizedBox(height: 20),
-            Container(
-              height: 40,
-              width: MediaQuery.of(context).size.width * 0.4,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
-                  borderRadius: BorderRadius.circular(20)),
-              child: TextButton(
-                onPressed: () {
-                  BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
-                },
-                child: Text('Update', style: TextStyle(color: Colors.teal)),
-              ),
-            ),
+            _updateButton(context),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _updateButton(context) {
+    return Container(
+      height: 40,
+      width: MediaQuery.of(context).size.width * 0.4,
+      decoration: BoxDecoration(
+          color: Theme.of(context).accentColor,
+          borderRadius: BorderRadius.circular(20)),
+      child: TextButton(
+        onPressed: () {
+          BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
+        },
+        child: Text('Update', style: TextStyle(color: Colors.teal)),
       ),
     );
   }

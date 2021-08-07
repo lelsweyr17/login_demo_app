@@ -12,7 +12,8 @@ class UserDataBloc extends Bloc<UserDataEvent, UserDataState> {
     if (event is GetDataEvent) {
       try {
         yield LoadingDataState();
-        final Map<int, List<Card>> cards = await ApiUserDataResponse.fetchCard();
+        final Map<int, List<Card>> cards =
+            await ApiUserDataResponse.fetchCard();
         await Future.delayed(Duration(milliseconds: 700));
         yield LoadedDataState(cards);
       } catch (_) {

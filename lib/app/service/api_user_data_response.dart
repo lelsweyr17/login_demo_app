@@ -18,23 +18,16 @@ class ApiUserDataResponse {
     var jsonData = json.decode(response.body);
 
     for (var i in jsonData) {
-      // strange cart texts (???)
       Card card = Card(
           id: i['id'],
           row: i['row'],
           seqNum: i['seq_num'],
           text: utf8.decode(i['text'].runes.toList()));
-      // print('id: ${i['id']}');
-      // print('row: ${i['row']}');
-      // print('seq_num: ${i['seq_num']}');
-      // print('text: ${utf8.decode(i['text'].runes.toList())}');
-      // print('_______________________________________________');
       cards.add(card);
     }
 
-
     if (response.statusCode == 200) {
-      Map<int, List<Card>> cardsMap = SortListToMap.sorting(cards).cast<int, List<Card>>();
+      Map<int, List<Card>> cardsMap = SortListToMap.sorting(cards);
       return cardsMap;
     } else {
       throw Exception('Failed to load data');

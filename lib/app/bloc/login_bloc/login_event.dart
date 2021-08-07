@@ -1,5 +1,4 @@
-abstract class LoginEvent {
-}
+abstract class LoginEvent {}
 
 class LoginUsernameChange extends LoginEvent {
   final String username;

@@ -5,7 +5,6 @@ import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_state
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc() : super(Unathenticated());
-  // AuthenticationBloc() : super(Authenticated());
 
   @override
   Stream<AuthenticationState> mapEventToState(
@@ -13,7 +12,7 @@ class AuthenticationBloc
     if (event is AppStarted) {
       yield Unathenticated();
     } else if (event is LoggedIn) {
-      await Future.delayed(Duration(milliseconds: 1500));
+      await Future.delayed(Duration(milliseconds: 700));
       yield Authenticated();
     } else if (event is LoggedOut) {
       yield Unathenticated();

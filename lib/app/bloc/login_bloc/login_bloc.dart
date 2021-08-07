@@ -13,13 +13,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LoginUsernameChange) {
-      print('username updated');
       yield* _mapLoginUsernameChangeToState(event.username);
     } else if (event is LoginPasswordChange) {
-      print('password updated');
       yield* _mapLoginPasswordChangeToState(event.password);
     } else if (event is LoginWithCredentialsPressed) {
-      print('login with credentials');
       yield* _mapLoginWithCredentialsPressedToState(
           event.username, event.password);
     }
@@ -35,10 +32,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithCredentialsPressedToState(
       username, password) async* {
-    // TODO: login with 'armada' & 'FSH6zBZ0p9yH'
-    yield LoginState.loading();
-
+    // login with 'armada' & 'FSH6zBZ0p9yH'
     try {
+      yield LoginState.loading();
       await ApiLoginResponse.authenticateUser(username, password);
       yield LoginState.success();
     } catch (e) {

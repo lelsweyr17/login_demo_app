@@ -55,23 +55,11 @@ class _LoginFormState extends State<LoginForm> {
       listener: (context, state) {
         if (state.isFailure) {
           // TODO: enter errors from server
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              duration: Duration(seconds: 1),
-              content: Text('Login failure'),
-              backgroundColor: Colors.redAccent,
-            ),
-          );
+          _notificationSnackBar(context, 'Login failure', Colors.redAccent);
         } else if (state.isSubmitting) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: Duration(seconds: 1),
-            content: Text('Logging in...'),
-          ));
+          _notificationSnackBar(context, 'Logging in...', Colors.white);
         } else if (state.isSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Login success'),
-              backgroundColor: Colors.greenAccent,
-              duration: Duration(seconds: 1)));
+          _notificationSnackBar(context, 'Login success', Colors.greenAccent);
           BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
         }
       },
@@ -105,6 +93,14 @@ class _LoginFormState extends State<LoginForm> {
         );
       }),
     );
+  }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+      _notificationSnackBar(context, message, color) {
+    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: color,
+        duration: Duration(milliseconds: 500)));
   }
 
   Widget sampleTextField(controller, isValid, errorMessage, obscure) {
