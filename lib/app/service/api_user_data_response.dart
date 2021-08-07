@@ -23,11 +23,11 @@ class ApiUserDataResponse {
           row: i['row'],
           seqNum: i['seq_num'],
           text: utf8.decode(i['text'].runes.toList()));
-      print('id: ${i['id']}');
-      print('row: ${i['row']}');
-      print('seq_num: ${i['seq_num']}');
-      print('text: ${utf8.decode(i['text'].runes.toList())}');
-      print('_______________________________________________');
+      // print('id: ${i['id']}');
+      // print('row: ${i['row']}');
+      // print('seq_num: ${i['seq_num']}');
+      // print('text: ${utf8.decode(i['text'].runes.toList())}');
+      // print('_______________________________________________');
       cards.add(card);
     }
 

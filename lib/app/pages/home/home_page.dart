@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_event.dart';
 import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_bloc.dart';
+import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_event.dart';
+import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_state.dart';
 part "home_tab_bar_view.dart";
 
 class HomePage extends StatelessWidget {
