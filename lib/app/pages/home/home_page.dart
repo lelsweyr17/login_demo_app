@@ -8,6 +8,13 @@ import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_state.dart
 part "home_tab_bar_view.dart";
 
 class HomePage extends StatelessWidget {
+  // BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
+
+  @override
+  void initState(context) {
+    BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

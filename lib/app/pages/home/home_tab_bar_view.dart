@@ -4,9 +4,8 @@ class HomeTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserDataBloc, UserDataState>(builder: (context, state) {
-      BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
       if (state is LoadingDataState) {
-        // print('loading...');
+        print('loading...');
         return loadingDataIndicator(context);
       } else if (state is LoadedDataState) {
         print('loaded!');
@@ -18,7 +17,8 @@ class HomeTabBarView extends StatelessWidget {
           _approved(context),
         ]);
       }
-      return Center(child: Icon(Icons.error, color: Theme.of(context).accentColor));
+      return Center(
+          child: Icon(Icons.error, color: Theme.of(context).accentColor));
     });
   }
 
