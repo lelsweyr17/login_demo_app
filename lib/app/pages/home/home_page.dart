@@ -5,6 +5,8 @@ import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_event
 import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_bloc.dart';
 import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_event.dart';
 import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_state.dart';
+import 'package:login_demo_app/app/pages/home/screen_states/loading_data_error.dart';
+import 'package:login_demo_app/app/pages/home/screen_states/loading_data_indicator.dart';
 part "home_tab_bar_view.dart";
 
 class HomePage extends StatelessWidget {

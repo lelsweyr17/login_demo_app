@@ -17,63 +17,37 @@ class HomeTabBarView extends StatelessWidget {
         });
   }
 
-  Widget _loadingDataIndicator(context) {
-    return Center(
-      child: CircularProgressIndicator(color: Theme.of(context).accentColor),
-    );
-  }
-
-  Widget _loadingDataError(context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.error_outline_rounded,
-              color: Theme.of(context).accentColor, size: 50),
-          SizedBox(height: 15),
-          Text('Loading data error!'),
-          SizedBox(height: 20),
-          Container(
-            height: 40,
-            width: MediaQuery.of(context).size.width * 0.4,
-            decoration: BoxDecoration(
-                color: Theme.of(context).accentColor,
-                borderRadius: BorderRadius.circular(20)),
-            child: TextButton(
-              onPressed: () {
-                BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
-              },
-              child: Text('Update', style: TextStyle(color: Colors.teal)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget? checkUserDataState(context, state) {
     if (state is LoadingDataState) {
       print('loading...');
-      return _loadingDataIndicator(context);
+      return LoadingDataIndicator();
     } else if (state is LoadingDataErrorState) {
-      print('loaded!');
-      return _loadingDataError(context);
+      print('error!');
+      return LoadingDataError();
     } else {
-      // return _loadingDataError(context);
       return null;
     }
   }
 
   Widget _onHold(context, state) {
     Widget? check = checkUserDataState(context, state);
+    // var values = state.cards.values.toList();
     return (check != null)
         ? check
         : ListView.builder(
-            itemCount: 10,
+            itemCount: state.cards[0]!.length,
             itemBuilder: (context, index) {
               return Card(
-                child: ListTile(
-                  title: Text('on hold'),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('ID: ${state.cards.values.toList()[0][index].id}'),
+                      SizedBox(height: 5),
+                      Text('${state.cards.values.toList()[0][index].text}'),
+                    ],
+                  ),
                 ),
               );
             });
@@ -84,11 +58,19 @@ class HomeTabBarView extends StatelessWidget {
     return (check != null)
         ? check
         : ListView.builder(
-            itemCount: 5,
+            itemCount: state.cards[1]!.length,
             itemBuilder: (context, index) {
               return Card(
-                child: ListTile(
-                  title: Text('in progress'),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('ID: ${state.cards.values.toList()[1][index].id}'),
+                      SizedBox(height: 5),
+                      Text('${state.cards.values.toList()[1][index].text}'),
+                    ],
+                  ),
                 ),
               );
             });
@@ -99,11 +81,19 @@ class HomeTabBarView extends StatelessWidget {
     return (check != null)
         ? check
         : ListView.builder(
-            itemCount: 7,
+            itemCount: state.cards[2]!.length,
             itemBuilder: (context, index) {
               return Card(
-                child: ListTile(
-                  title: Text('needs review'),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('ID: ${state.cards.values.toList()[2][index].id}'),
+                      SizedBox(height: 5),
+                      Text('${state.cards.values.toList()[2][index].text}'),
+                    ],
+                  ),
                 ),
               );
             });
@@ -114,11 +104,19 @@ class HomeTabBarView extends StatelessWidget {
     return (check != null)
         ? check
         : ListView.builder(
-            itemCount: 2,
+            itemCount: state.cards[3]!.length,
             itemBuilder: (context, index) {
               return Card(
-                child: ListTile(
-                  title: Text('approved'),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('ID: ${state.cards.values.toList()[3][index].id}'),
+                      SizedBox(height: 5),
+                      Text('${state.cards.values.toList()[3][index].text}'),
+                    ],
+                  ),
                 ),
               );
             });

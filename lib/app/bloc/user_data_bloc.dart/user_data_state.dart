@@ -5,7 +5,7 @@ abstract class UserDataState {}
 class LoadingDataState extends UserDataState {}
 
 class LoadedDataState extends UserDataState {
-  List<Card> cards;
+  Map<int, List<Card>> cards;
 
   LoadedDataState(this.cards);
 }

@@ -13,6 +13,7 @@ class AuthenticationBloc
     if (event is AppStarted) {
       yield Unathenticated();
     } else if (event is LoggedIn) {
+      await Future.delayed(Duration(milliseconds: 1500));
       yield Authenticated();
     } else if (event is LoggedOut) {
       yield Unathenticated();
