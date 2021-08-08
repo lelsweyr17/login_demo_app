@@ -21,9 +21,20 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
-      child: Scaffold(
-        appBar: _appBar(context),
-        body: HomeTabBarView(),
+      child: Builder(
+        builder: (BuildContext context) {
+          final TabController tabController = DefaultTabController.of(context)!;
+          tabController.addListener(() {
+            if (!tabController.indexIsChanging) {
+              BlocProvider.of<UserDataBloc>(context)
+                  .add(GetDataEvent(tabController.index));
+            }
+          });
+          return Scaffold(
+            appBar: _appBar(context),
+            body: HomeTabBarView(),
+          );
+        },
       ),
     );
   }
@@ -35,11 +46,6 @@ class HomePage extends StatelessWidget {
           _logOutButton(context),
         ],
         bottom: TabBar(
-          onTap: (i) {
-            // print("index: $i");
-            // print('default index: ${DefaultTabController.of(context)!.index}');
-            BlocProvider.of<UserDataBloc>(context).add(GetDataEvent(i));
-          },
           isScrollable: true,
           tabs: tabs,
         ));
