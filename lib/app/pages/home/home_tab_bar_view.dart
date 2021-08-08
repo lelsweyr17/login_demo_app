@@ -3,7 +3,6 @@ part of "home_page.dart";
 class HomeTabBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
     final bloc = context.read<UserDataBloc>();
     return BlocBuilder<UserDataBloc, UserDataState>(
         bloc: bloc,

@@ -10,16 +10,20 @@ import 'package:login_demo_app/app/pages/home/screen_states/loading_data_indicat
 part "home_tab_bar_view.dart";
 
 class HomePage extends StatelessWidget {
+  final List<Tab> tabs = [
+    Tab(text: 'On hold'),
+    Tab(text: 'In progress'),
+    Tab(text: 'Needs review'),
+    Tab(text: 'Approved'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: tabs.length,
       child: Scaffold(
         appBar: _appBar(context),
-        body: BlocProvider<UserDataBloc>(
-          create: (context) => UserDataBloc(),
-          child: HomeTabBarView(),
-        ),
+        body: HomeTabBarView(),
       ),
     );
   }
@@ -31,13 +35,12 @@ class HomePage extends StatelessWidget {
           _logOutButton(context),
         ],
         bottom: TabBar(
+          onTap: (index) {
+            print(index);
+            BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
+          },
           isScrollable: true,
-          tabs: [
-            Tab(text: 'On hold'),
-            Tab(text: 'In progress'),
-            Tab(text: 'Needs review'),
-            Tab(text: 'Approved'),
-          ],
+          tabs: tabs,
         ));
   }
 
