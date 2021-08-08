@@ -7,7 +7,7 @@ class ApiLoginResponse {
   static Future<void> authenticateUser(String username, String password) async {
     final response = await http.post(
         Uri.parse(
-            'https://trello.backend.tests.nekidaem.ru/api/v1/users/login/'),
+            '${globals.url}/users/login/'),
         body: {
           'username': username,
           'password': password,

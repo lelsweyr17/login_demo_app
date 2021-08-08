@@ -12,7 +12,7 @@ class ApiUserDataResponse {
 
     final response = await http.get(
       Uri.parse(
-          'https://trello.backend.tests.nekidaem.ru/api/v1/cards?row=$index'),
+          '${globals.url}/cards?row=$index'),
       headers: {HttpHeaders.authorizationHeader: header},
     );
 

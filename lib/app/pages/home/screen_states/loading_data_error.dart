@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_bloc.dart';
-import 'package:login_demo_app/app/bloc/user_data_bloc.dart/user_data_event.dart';
+import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_bloc.dart';
+import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_event.dart';
 
 class LoadingDataError extends StatelessWidget {
   @override

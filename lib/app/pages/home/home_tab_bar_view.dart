@@ -18,19 +18,17 @@ class HomeTabBarView extends StatelessWidget {
     List<Widget> widgets = [];
     late Widget? check;
 
+    // TODO: tabs.lenght
     for (int i = 0; i < 4; i++) {
       check = _checkLoadingDataState(context, state);
       if (i != index) {
         widgets.add(LoadingDataIndicator());
+      } else if (check != null) {
+        widgets.add(check);
       } else {
-        if (check != null) {
-          widgets.add(check);
-        } else {
-          widgets.add(_listOfCards(context, state));
-        }
+        widgets.add(_listOfCards(context, state));
       }
     }
-
     return widgets;
   }
 

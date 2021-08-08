@@ -6,6 +6,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  //TODO: hardcode is forbidden
   LoginBloc _loginBloc = LoginBloc();
 
   final _formKey = GlobalKey<FormState>();
