@@ -11,8 +11,8 @@ class ApiUserDataResponse {
     var header = 'JWT ' + '${globals.token}';
 
     final response = await http.get(
-      // Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/cards/'),
-      Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/cards?row=$index'),
+      Uri.parse(
+          'https://trello.backend.tests.nekidaem.ru/api/v1/cards?row=$index'),
       headers: {HttpHeaders.authorizationHeader: header},
     );
 
