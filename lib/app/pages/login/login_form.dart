@@ -111,6 +111,7 @@ class _LoginFormState extends State<LoginForm> {
         cursorColor: Theme.of(context).accentColor,
         decoration: InputDecoration(
           errorText: !isValid ? errorMessage : null,
+          hintText: obscure ? 'Enter your password' : 'Enter your username',
           focusedBorder: OutlineInputBorder(
             borderRadius:
                 BorderRadius.circular(MediaQuery.of(context).size.height * 0.5),
