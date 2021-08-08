@@ -35,9 +35,10 @@ class HomePage extends StatelessWidget {
           _logOutButton(context),
         ],
         bottom: TabBar(
-          onTap: (index) {
-            print(index);
-            BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
+          onTap: (i) {
+            // print("index: $i");
+            // print('default index: ${DefaultTabController.of(context)!.index}');
+            BlocProvider.of<UserDataBloc>(context).add(GetDataEvent(i));
           },
           isScrollable: true,
           tabs: tabs,

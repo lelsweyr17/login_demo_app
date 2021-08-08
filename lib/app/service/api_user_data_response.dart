@@ -6,13 +6,13 @@ import 'package:login_demo_app/app/models/Card.dart';
 import 'package:login_demo_app/app/utils/sort_list_to_map.dart';
 
 class ApiUserDataResponse {
-  static Future<Map<int, List<Card>>> fetchCard() async {
+  static Future<List<Card>> fetchCard(index) async {
     List<Card> cards = [];
     var header = 'JWT ' + '${globals.token}';
 
     final response = await http.get(
-      Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/cards/'),
-      // Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/cards?row=0'),
+      // Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/cards/'),
+      Uri.parse('https://trello.backend.tests.nekidaem.ru/api/v1/cards?row=$index'),
       headers: {HttpHeaders.authorizationHeader: header},
     );
 
@@ -28,7 +28,7 @@ class ApiUserDataResponse {
     }
 
     if (response.statusCode == 200) {
-      Map<int, List<Card>> cardsMap = SortListToMap.sorting(cards);
+      List<Card> cardsMap = SortListToMap.sorting(cards);
       return cardsMap;
     } else {
       throw Exception('Failed to load data');

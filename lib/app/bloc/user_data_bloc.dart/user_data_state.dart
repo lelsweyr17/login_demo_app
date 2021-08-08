@@ -5,9 +5,10 @@ abstract class UserDataState {}
 class LoadingDataState extends UserDataState {}
 
 class LoadedDataState extends UserDataState {
-  Map<int, List<Card>> cards;
+  List<Card> cards;
+  int index;
 
-  LoadedDataState(this.cards);
+  LoadedDataState(this.cards, this.index);
 }
 
 class LoadingDataErrorState extends UserDataState {}

@@ -16,7 +16,7 @@ class ApiLoginResponse {
     switch (response.statusCode) {
       case 200:
         globals.token = jsonDecode(response.body)['token'];
-        ApiUserDataResponse.fetchCard();
+        ApiUserDataResponse.fetchCard(0);
         break;
       case 400:
         throw Exception('400 error');

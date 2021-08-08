@@ -1,8 +1,11 @@
 part of "home_page.dart";
 
 class HomeTabBarView extends StatelessWidget {
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<UserDataBloc>(context).add(GetDataEvent(0));
     final bloc = context.read<UserDataBloc>();
     return BlocBuilder<UserDataBloc, UserDataState>(
         bloc: bloc,
@@ -13,13 +16,18 @@ class HomeTabBarView extends StatelessWidget {
 
   List<Widget> _tabBarViewChildren(context, state) {
     List<Widget> widgets = [];
-    Widget? check = _checkLoadingDataState(context, state);
+    late Widget? check;
 
     for (int i = 0; i < 4; i++) {
-      if (check != null) {
-        widgets.add(check);
+      check = _checkLoadingDataState(context, state);
+      if (i != index) {
+        widgets.add(LoadingDataIndicator());
       } else {
-        widgets.add(_listOfCards(context, state, i, check));
+        if (check != null) {
+          widgets.add(check);
+        } else {
+          widgets.add(_listOfCards(context, state));
+        }
       }
     }
 
@@ -32,24 +40,24 @@ class HomeTabBarView extends StatelessWidget {
     } else if (state is LoadingDataErrorState) {
       return LoadingDataError();
     } else {
+      index = state.index;
       return null;
     }
   }
 
-  Widget _listOfCards(context, state, num, check) {
+  Widget _listOfCards(context, state) {
     return ListView.builder(
-        itemCount: state.cards[num]!.length,
+        itemCount: state.cards.length,
         itemBuilder: (context, index) {
-          var values = state.cards.values.toList();
           return Card(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('ID: ${values[num][index].id}'),
+                  Text('ID: ${state.cards[index].id}'),
                   SizedBox(height: 5),
-                  Text('${values[num][index].text}'),
+                  Text('${state.cards[index].text}'),
                 ],
               ),
             ),

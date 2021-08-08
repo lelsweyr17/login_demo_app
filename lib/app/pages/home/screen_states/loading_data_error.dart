@@ -32,7 +32,8 @@ class LoadingDataError extends StatelessWidget {
           borderRadius: BorderRadius.circular(20)),
       child: TextButton(
         onPressed: () {
-          BlocProvider.of<UserDataBloc>(context).add(GetDataEvent());
+          //TODO: index of current tap in argument
+          BlocProvider.of<UserDataBloc>(context).add(GetDataEvent(0));
         },
         child: Text('Update', style: TextStyle(color: Colors.teal)),
       ),
