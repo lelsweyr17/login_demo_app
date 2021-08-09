@@ -11,7 +11,7 @@ First screen:
 
 Second screen:
 
-1. It has lists “On hold”, “In progress”, “Needs review”, “Approved”.
+1. It has lists 'On hold', 'In progress', 'Needs review', 'Approved'.
 2. Switching between lists done with a swipe left or right or with a tap on tab bar.
 3. Tap on top-right button for logout.
 
