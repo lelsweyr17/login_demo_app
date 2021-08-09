@@ -1,7 +1,9 @@
 part of "home_page.dart";
 
 class HomeTabBarView extends StatelessWidget {
-  int index = 0;
+  int tabsLength;
+
+  HomeTabBarView(this.tabsLength);
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +20,9 @@ class HomeTabBarView extends StatelessWidget {
     List<Widget> widgets = [];
     late Widget? check;
 
-    // TODO: tabs.lenght
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < tabsLength; i++) {
       check = _checkLoadingDataState(context, state);
-      if (i != index) {
+      if (i != globals.tabIndex) {
         widgets.add(LoadingDataIndicator());
       } else if (check != null) {
         widgets.add(check);
@@ -38,7 +39,7 @@ class HomeTabBarView extends StatelessWidget {
     } else if (state is LoadingDataErrorState) {
       return LoadingDataError();
     } else {
-      index = state.index;
+      globals.tabIndex = state.index;
       return null;
     }
   }

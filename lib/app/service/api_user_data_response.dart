@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:login_demo_app/app/global/globals.dart' as globals;
 import 'package:login_demo_app/app/models/Card.dart';
-import 'package:login_demo_app/app/utils/sort_list_to_map.dart';
+import 'package:login_demo_app/app/utils/sorting.dart';
 
 class ApiUserDataResponse {
   static Future<List<Card>> fetchCard(index) async {
@@ -28,7 +28,7 @@ class ApiUserDataResponse {
     }
 
     if (response.statusCode == 200) {
-      List<Card> cardsMap = SortListToMap.sorting(cards);
+      List<Card> cardsMap = Sorting.sortListById(cards);
       return cardsMap;
     } else {
       throw Exception('Failed to load data');

@@ -4,6 +4,7 @@ class LoginState {
   final bool isSubmitting;
   final bool isSuccess;
   final bool isFailure;
+  final String error;
 
   bool get isFormValid => isUsernameValid && isPasswordValid;
 
@@ -12,7 +13,8 @@ class LoginState {
       required this.isPasswordValid,
       required this.isSubmitting,
       required this.isSuccess,
-      required this.isFailure});
+      required this.isFailure,
+      this.error = '200'});
 
   factory LoginState.empty() {
     return LoginState(
@@ -32,13 +34,14 @@ class LoginState {
         isFailure: false);
   }
 
-  factory LoginState.failure() {
+  factory LoginState.failure(String err) {
     return LoginState(
         isUsernameValid: true,
         isPasswordValid: true,
         isSubmitting: false,
         isSuccess: false,
-        isFailure: true);
+        isFailure: true,
+        error: err);
   }
 
   factory LoginState.success() {

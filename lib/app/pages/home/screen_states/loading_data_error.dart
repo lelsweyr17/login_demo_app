@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_bloc.dart';
 import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_event.dart';
+import 'package:login_demo_app/app/global/globals.dart' as globals;
 
 class LoadingDataError extends StatelessWidget {
   @override
@@ -32,8 +33,7 @@ class LoadingDataError extends StatelessWidget {
           borderRadius: BorderRadius.circular(20)),
       child: TextButton(
         onPressed: () {
-          //TODO: index of current tap in argument
-          BlocProvider.of<UserDataBloc>(context).add(GetDataEvent(0));
+          BlocProvider.of<UserDataBloc>(context).add(GetDataEvent(globals.tabIndex));
         },
         child: Text('Update', style: TextStyle(color: Colors.teal)),
       ),

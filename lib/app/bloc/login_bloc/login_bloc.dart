@@ -32,13 +32,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginWithCredentialsPressedToState(
       username, password) async* {
-    // login with 'armada' & 'FSH6zBZ0p9yH'
     try {
       yield LoginState.loading();
       await ApiLoginResponse.authenticateUser(username, password);
       yield LoginState.success();
     } catch (e) {
-      yield LoginState.failure();
+      yield LoginState.failure(e.toString());
     }
   }
 }

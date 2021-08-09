@@ -7,6 +7,7 @@ import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_event.dart';
 import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_state.dart';
 import 'package:login_demo_app/app/pages/home/screen_states/loading_data_error.dart';
 import 'package:login_demo_app/app/pages/home/screen_states/loading_data_indicator.dart';
+import 'package:login_demo_app/app/global/globals.dart' as globals;
 part "home_tab_bar_view.dart";
 
 class HomePage extends StatelessWidget {
@@ -32,7 +33,7 @@ class HomePage extends StatelessWidget {
           });
           return Scaffold(
             appBar: _appBar(context),
-            body: HomeTabBarView(),
+            body: HomeTabBarView(tabs.length),
           );
         },
       ),

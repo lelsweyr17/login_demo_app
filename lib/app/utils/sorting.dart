@@ -1,7 +1,7 @@
 import 'package:login_demo_app/app/models/Card.dart';
 
-class SortListToMap {
-  static List<Card> sorting(List<Card> cards) {
+class Sorting {
+  static List<Card> sortListById(List<Card> cards) {
     cards.sort((a, b) => (a.id).compareTo(b.id));
     return cards;
   }

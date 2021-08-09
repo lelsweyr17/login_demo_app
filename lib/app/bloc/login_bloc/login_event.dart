@@ -15,6 +15,7 @@ class LoginPasswordChange extends LoginEvent {
 class LoginWithCredentialsPressed extends LoginEvent {
   final String username;
   final String password;
+  final int error;
 
-  LoginWithCredentialsPressed(this.username, this.password);
+  LoginWithCredentialsPressed(this.username, this.password, {this.error = 200});
 }
