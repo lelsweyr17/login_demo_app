@@ -1,6 +1,6 @@
 # login_demo_app
 
-Demo app with autentication.
+Demo app with authentication.
 
 First screen:
 
