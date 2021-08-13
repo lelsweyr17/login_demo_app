@@ -5,6 +5,8 @@ import 'package:login_demo_app/app/bloc/authentication_bloc/authentication_event
 import 'package:login_demo_app/app/bloc/login_bloc/login_bloc.dart';
 import 'package:login_demo_app/app/bloc/login_bloc/login_event.dart';
 import 'package:login_demo_app/app/bloc/login_bloc/login_state.dart';
+import 'package:login_demo_app/app/pages/login/widgets/log_in_button.dart';
+import 'package:login_demo_app/app/pages/login/widgets/sample_text_field.dart';
 part "login_form.dart";
 
 class LoginPage extends StatelessWidget {

@@ -8,7 +8,10 @@ import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_state.dart';
 import 'package:login_demo_app/app/pages/home/screen_states/loading_data_error.dart';
 import 'package:login_demo_app/app/pages/home/screen_states/loading_data_indicator.dart';
 import 'package:login_demo_app/app/global/globals.dart' as globals;
+
 part "home_tab_bar_view.dart";
+part "widgets/app_bar.dart";
+part "widgets/log_out_button.dart";
 
 class HomePage extends StatelessWidget {
   final List<Tab> tabs = [
@@ -32,39 +35,11 @@ class HomePage extends StatelessWidget {
             }
           });
           return Scaffold(
-            appBar: _appBar(context),
+            appBar: HomeAppBar(tabs),
             body: HomeTabBarView(tabs.length),
           );
         },
       ),
     );
-  }
-
-  PreferredSizeWidget _appBar(context) {
-    return AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          _logOutButton(context),
-        ],
-        bottom: TabBar(
-          isScrollable: true,
-          tabs: tabs,
-        ));
-  }
-
-  Widget _logOutButton(context) {
-    return Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Theme.of(context).accentColor,
-        ),
-        child: IconButton(
-            icon: Icon(Icons.arrow_back_rounded),
-            onPressed: () {
-              BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
-            },
-            splashRadius: 25));
   }
 }

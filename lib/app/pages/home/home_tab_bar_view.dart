@@ -1,7 +1,7 @@
 part of "home_page.dart";
 
 class HomeTabBarView extends StatelessWidget {
-  int tabsLength;
+  final int tabsLength;
 
   HomeTabBarView(this.tabsLength);
 
