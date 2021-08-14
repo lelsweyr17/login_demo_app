@@ -5,7 +5,9 @@ class LoadingDataIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(color: Theme.of(context).accentColor),
+        child: CircularProgressIndicator(
+          color: Theme.of(context).accentColor,
+        ),
       ),
     );
   }

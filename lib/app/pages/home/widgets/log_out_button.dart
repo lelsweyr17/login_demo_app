@@ -11,11 +11,12 @@ class LogOutButton extends StatelessWidget {
         color: Theme.of(context).accentColor,
       ),
       child: IconButton(
-          icon: Icon(Icons.arrow_back_rounded),
-          onPressed: () {
-            BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
-          },
-          splashRadius: 25),
+        icon: Icon(Icons.arrow_back_rounded),
+        onPressed: () {
+          BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
+        },
+        splashRadius: 25,
+      ),
     );
   }
 }

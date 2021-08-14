@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_bloc.dart';
 import 'package:login_demo_app/app/bloc/user_data_bloc/user_data_event.dart';
 import 'package:login_demo_app/app/global/globals.dart' as globals;
+part "../widgets/update_button.dart";
 
 class LoadingDataError extends StatelessWidget {
   @override
@@ -12,30 +13,17 @@ class LoadingDataError extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.error_outline_rounded,
-                color: Theme.of(context).accentColor, size: 50),
+            Icon(
+              Icons.error_outline_rounded,
+              color: Theme.of(context).accentColor,
+              size: 50,
+            ),
             SizedBox(height: 15),
             Text('Loading data error!'),
             SizedBox(height: 20),
-            _updateButton(context),
+            UpdateButton(),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _updateButton(context) {
-    return Container(
-      height: 40,
-      width: MediaQuery.of(context).size.width * 0.4,
-      decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
-          borderRadius: BorderRadius.circular(20)),
-      child: TextButton(
-        onPressed: () {
-          BlocProvider.of<UserDataBloc>(context).add(GetDataEvent(globals.tabIndex));
-        },
-        child: Text('Update', style: TextStyle(color: Colors.teal)),
       ),
     );
   }
