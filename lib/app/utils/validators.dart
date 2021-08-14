@@ -1,9 +1,9 @@
-class Validators {
-  static isValidUsername(String username) {
+extension Validators on String {
+  bool isValidUsername(String username) {
     return username.length >= 4;
   }
 
-  static isValidPassword(String password) {
+  bool isValidPassword(String password) {
     return password.length >= 8;
   }
 }

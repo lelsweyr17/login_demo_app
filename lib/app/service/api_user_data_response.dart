@@ -11,8 +11,7 @@ class ApiUserDataResponse {
     var header = 'JWT ' + '${globals.token}';
 
     final response = await http.get(
-      Uri.parse(
-          '${globals.url}/cards?row=$index'),
+      Uri.parse('${globals.url}/cards?row=$index'),
       headers: {HttpHeaders.authorizationHeader: header},
     );
 
@@ -20,15 +19,18 @@ class ApiUserDataResponse {
 
     for (var i in jsonData) {
       Card card = Card(
-          id: i['id'],
-          row: i['row'],
-          seqNum: i['seq_num'],
-          text: utf8.decode(i['text'].runes.toList()));
+        id: i['id'],
+        row: i['row'],
+        seqNum: i['seq_num'],
+        text: utf8.decode(
+          i['text'].runes.toList(),
+        ),
+      );
       cards.add(card);
     }
 
     if (response.statusCode == 200) {
-      List<Card> cardsMap = Sorting.sortListById(cards);
+      List<Card> cardsMap = Sorting(cards).sortListById(cards);
       return cardsMap;
     } else {
       throw Exception('Failed to load data');

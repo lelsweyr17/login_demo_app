@@ -5,11 +5,13 @@ import 'package:login_demo_app/app/global/globals.dart' as globals;
 
 class ApiLoginResponse {
   static Future<void> authenticateUser(String username, String password) async {
-    final response =
-        await http.post(Uri.parse('${globals.url}/users/login/'), body: {
-      'username': username,
-      'password': password,
-    });
+    final response = await http.post(
+      Uri.parse('${globals.url}/users/login/'),
+      body: {
+        'username': username,
+        'password': password,
+      },
+    );
 
     switch (response.statusCode) {
       case 200:

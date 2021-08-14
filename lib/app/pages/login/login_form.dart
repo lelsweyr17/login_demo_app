@@ -75,10 +75,6 @@ class _LoginFormState extends State<LoginForm> {
         duration: Duration(milliseconds: 500)));
   }
 
-  bool get isNotEmpty =>
-      _usernameController.text.isNotEmpty &&
-      _passwordController.text.isNotEmpty;
-
   void _usernameChanged() {
     _loginBloc.add(LoginUsernameChange(_usernameController.text));
   }

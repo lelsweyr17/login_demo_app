@@ -36,6 +36,8 @@ class LogInButton extends StatelessWidget {
           onPressed: () {
             if (isLoginButtonEnabled(state)) {
               _onFormSubmitted();
+              _passwordController.text = '';
+              _usernameController.text = '';
             }
           },
         ));
