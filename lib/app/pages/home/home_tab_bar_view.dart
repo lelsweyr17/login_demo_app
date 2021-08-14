@@ -12,9 +12,13 @@ class HomeTabBarView extends StatelessWidget {
     return BlocBuilder<UserDataBloc, UserDataState>(
         bloc: bloc,
         builder: (context, state) {
-          return TabBarView(children: _tabBarViewChildren(context, state));
+          return TabBarView(
+            children: _tabBarViewChildren(context, state),
+          );
         });
   }
+
+  // TODO: save state of loaded screen
 
   List<Widget> _tabBarViewChildren(context, state) {
     List<Widget> widgets = [];
@@ -27,7 +31,7 @@ class HomeTabBarView extends StatelessWidget {
       } else if (check != null) {
         widgets.add(check);
       } else {
-        widgets.add(_listOfCards(context, state));
+        widgets.add(ListOfCards(state));
       }
     }
     return widgets;
@@ -42,25 +46,5 @@ class HomeTabBarView extends StatelessWidget {
       globals.tabIndex = state.index;
       return null;
     }
-  }
-
-  Widget _listOfCards(context, state) {
-    return ListView.builder(
-        itemCount: state.cards.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('ID: ${state.cards[index].id}'),
-                  SizedBox(height: 5),
-                  Text('${state.cards[index].text}'),
-                ],
-              ),
-            ),
-          );
-        });
   }
 }

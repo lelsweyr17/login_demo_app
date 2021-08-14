@@ -12,6 +12,7 @@ import 'package:login_demo_app/app/global/globals.dart' as globals;
 part "home_tab_bar_view.dart";
 part "widgets/app_bar.dart";
 part "widgets/log_out_button.dart";
+part "widgets/list_of_cards.dart";
 
 class HomePage extends StatelessWidget {
   final List<Tab> tabs = [
