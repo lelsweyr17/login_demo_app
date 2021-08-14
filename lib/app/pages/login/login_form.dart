@@ -25,12 +25,12 @@ class _LoginFormState extends State<LoginForm> {
         }
       },
       child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-        final double screenHeight = MediaQuery.of(context).size.height;
-        final double loginHeight =
-            (screenHeight * 0.3 > 220) ? screenHeight * 0.3 : 220;
-        final double loginWidth = MediaQuery.of(context).size.width * 0.8;
         final String usernameErrorMessage = 'Minimum is 4 characters';
         final String passwordErrorMessage = 'Minimum is 8 characters';
+        final Size size = MediaQuery.of(context).size;
+        final double loginWidth = size.width * 0.8;
+        final double loginHeight =
+            (size.height * 0.3 > 220) ? (size.height * 0.3) : 220;
         return Center(
           child: Container(
             height: loginHeight,
@@ -67,12 +67,14 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
-      _notificationSnackBar(context, message, color) {
-    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  ScaffoldFeatureController _notificationSnackBar(context, message, color) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
         content: Text(message),
         backgroundColor: color,
-        duration: Duration(milliseconds: 500)));
+        duration: Duration(milliseconds: 500),
+      ),
+    );
   }
 
   void _usernameChanged() {

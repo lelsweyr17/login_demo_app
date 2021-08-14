@@ -22,9 +22,7 @@ class ApiUserDataResponse {
         id: i['id'],
         row: i['row'],
         seqNum: i['seq_num'],
-        text: utf8.decode(
-          i['text'].runes.toList(),
-        ),
+        text: utf8.decode(i['text'].runes.toList()),
       );
       cards.add(card);
     }
