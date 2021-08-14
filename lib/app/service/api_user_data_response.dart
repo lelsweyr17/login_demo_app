@@ -30,8 +30,7 @@ class ApiUserDataResponse {
     }
 
     if (response.statusCode == 200) {
-      List<Card> cardsMap = Sorting(cards).sortListById();
-      return cardsMap;
+      return Sorting(cards).sortListById();
     } else {
       throw Exception('Failed to load data');
     }
