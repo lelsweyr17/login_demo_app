@@ -77,12 +77,15 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+  get usernameText => _usernameController.text;
+  get passwordText => _passwordController.text;
+
   void _usernameChanged() {
-    _loginBloc.add(LoginUsernameChange(_usernameController.text));
+    _loginBloc.add(LoginUsernameChange(usernameText));
   }
 
   void _passwordChanged() {
-    _loginBloc.add(LoginPasswordChange(_passwordController.text));
+    _loginBloc.add(LoginPasswordChange(passwordText));
   }
 
   @override
