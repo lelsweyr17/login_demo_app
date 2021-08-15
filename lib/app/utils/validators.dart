@@ -1,9 +1,4 @@
 extension Validators on String {
-  bool isValidUsername() {
-    return this.length >= 4;
-  }
-
-  bool isValidPassword() {
-    return this.length >= 8;
-  }
+  bool isValidUsername() => this.length >= 4;
+  bool isValidPassword() => this.length >= 8;
 }
